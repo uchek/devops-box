@@ -5,8 +5,8 @@ if [ -e /etc/redhat-release ] ; then
   REDHAT_BASED=true
 fi
 
-TERRAFORM_VERSION="0.11.7"
-PACKER_VERSION="1.2.4"
+TERRAFORM_VERSION="0.11.13"
+PACKER_VERSION="1.3.5"
 # create new ssh key
 [[ ! -f /home/ubuntu/.ssh/mykey ]] \
 && mkdir -p /home/ubuntu/.ssh \
@@ -20,6 +20,10 @@ if [ ${REDHAT_BASED} ] ; then
 else 
   apt-get update
   apt-get -y install docker.io ansible unzip
+  apt-get install openjdk-8-jre
+  wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+  sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+  apt-get install jenkins
 fi
 # add docker privileges
 usermod -G docker ubuntu
