@@ -25,6 +25,8 @@ else
   sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
   apt-get update
   apt-get -y install jenkins
+  usermod -aG docker jenkins
+  apt -y install npm
 fi
 # add docker privileges
 usermod -G docker ubuntu
