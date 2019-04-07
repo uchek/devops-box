@@ -20,10 +20,11 @@ if [ ${REDHAT_BASED} ] ; then
 else 
   apt-get update
   apt-get -y install docker.io ansible unzip
-  apt-get install openjdk-8-jre
+  apt-get -y install openjdk-8-jre-headless
   wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
   sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-  apt-get install jenkins
+  apt-get update
+  apt-get -y install jenkins
 fi
 # add docker privileges
 usermod -G docker ubuntu
